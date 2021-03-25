@@ -1,5 +1,5 @@
-import { LatLng, LatLngTuple } from 'leaflet';
-import { FC, useEffect, useState } from 'react';
+import { LatLng } from 'leaflet';
+import React, { useEffect, useState } from 'react';
 import { getCurrentConditions } from '../../wxapi/functions';
 import { ICurrentConditions } from '../../wxapi/ICurrentConditions';
 import './CurrentConditions.css';
@@ -10,14 +10,14 @@ const ctof = (celsius: number|undefined): number => {
     }
 
     return Math.round(celsius * 5 / 9 + 32);
-}
+};
 
 type CurrentConditionsProps = {
     point: LatLng
 }
 
-export const CurrentConditions: FC<CurrentConditionsProps> = ({point}: CurrentConditionsProps) => {
-    const [currentConditions, setCurrentConditions] = useState<ICurrentConditions | null>(null)
+export const CurrentConditions = ({point}: CurrentConditionsProps): JSX.Element => {
+    const [currentConditions, setCurrentConditions] = useState<ICurrentConditions | null>(null);
 
     useEffect(() => {
         getCurrentConditions(point.lat, point.lng).then(data => {
@@ -25,14 +25,14 @@ export const CurrentConditions: FC<CurrentConditionsProps> = ({point}: CurrentCo
             setCurrentConditions(data);
         }).catch(reason => {
             console.log(reason);
-            setCurrentConditions(null)
-        })
-    }, [point])
+            setCurrentConditions(null);
+        });
+    }, [point]);
     return (
         <div className="current-conditions">
             Conditions Report for {currentConditions?.properties.stationName}<br />
             Temperature: {ctof(currentConditions?.properties.temperature.value)} &deg;F<br />
             <img src={currentConditions?.properties.icon} alt={currentConditions?.properties.textDescription} />
         </div>
-    )
-}
+    );
+};

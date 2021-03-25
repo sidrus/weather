@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { CurrentConditions } from './CurrentConditions';
 import { LatLng, Map } from 'leaflet';
 
@@ -6,19 +6,19 @@ type MapCurrentConditionsProps = {
     map: Map
 }
 
-export const MapCurrentConditions : FC<MapCurrentConditionsProps> = ({ map }) => {
-    const [position, setPosition] = useState<LatLng>(map.getCenter())
+export const MapCurrentConditions = ({ map }: MapCurrentConditionsProps): JSX.Element => {
+    const [position, setPosition] = useState<LatLng>(map.getCenter());
 
     const onMove = useCallback(() => {
-        setPosition(map.getCenter())
-    }, [map])
+        setPosition(map.getCenter());
+    }, [map]);
 
     useEffect(() => {
         map.on('moveend', onMove);
         return () => {
-            map.off('moveend', onMove)
-        }
-    }, [map, onMove])
+            map.off('moveend', onMove);
+        };
+    }, [map, onMove]);
 
-    return <CurrentConditions point={position} />
-}
+    return <CurrentConditions point={position} />;
+};
