@@ -1,20 +1,20 @@
-import React, { FC } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LatLng, Map } from 'leaflet';
-import './MapView.css'
+import './MapView.css';
 
 type MapProps = {
     initialLocation: LatLng
     onWhenCreated?: (map: Map) => void;
 }
 
-export const MapView : FC<MapProps> = ({initialLocation, onWhenCreated}) =>
+export const MapView = ({initialLocation, onWhenCreated}: MapProps): JSX.Element =>
 {
     const createdHandler = (map: Map) => {
         if (onWhenCreated) {
             onWhenCreated(map);
         }
-    }
+    };
 
     return (
         <MapContainer className="map" center={initialLocation} zoom={10} scrollWheelZoom={true} whenCreated={createdHandler}>
@@ -28,5 +28,5 @@ export const MapView : FC<MapProps> = ({initialLocation, onWhenCreated}) =>
                 </Popup>
             </Marker>
         </MapContainer>
-    )
-}
+    );
+};

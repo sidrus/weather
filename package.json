@@ -3,25 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
     "axios": "^0.21.1",
     "leaflet": "^1.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-leaflet": "^3.1.0",
     "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "sync": "yarn build && aws s3 sync ./build s3://wxdev.brandonfrie.com-bucket --profile retro-dev",
+    "tf:plan": "cd src/infrastructure && terraform plan && cd ../..",
+    "tf:apply": "cd src/infrastructure && terraform apply -auto-approve && cd ../..",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -44,6 +39,23 @@
     ]
   },
   "devDependencies": {
-    "@types/leaflet": "^1.7.0"
-  }
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/leaflet": "^1.7.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "eslint": "^7.22.0",
+    "eslint-plugin-react": "^7.23.1",
+    "style-loader": "^2.0.0",
+    "terraform": "^1.11.0",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
+    "webpack-cli": "^4.5.0"
+  },
+  "description": "My webpack project"
 }
