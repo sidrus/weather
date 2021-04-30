@@ -1,3 +1,7 @@
 .map {
-    flex: 0 0 60%;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
